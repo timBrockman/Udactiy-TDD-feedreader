@@ -103,7 +103,23 @@ $(function() {
 
     });
     /* TODO: Write a new test suite named "Initial Entries" */
-    var loadedEntry;//for future comparison
+    function hasEntries(){
+      var entries = document.getElementsByClassName('entry');
+      if(entries.length > 0){
+        return true;
+      }
+      return false;
+    }
+    function getEntry(callBack){
+      var entries = document.getElementsByClassName('entry');
+      if(entries.length > 0){
+        callBack();
+        console.log(entries[0]);
+        return entries[0];
+      }
+      callBack();
+      return undefined;
+    }
     describe("Initial Entries", function(){
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -111,14 +127,6 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-        function hasEntries(){
-          var entries = document.getElementsByClassName('entry');
-          if(entries.length > 0){
-            loadedEntry = entries[0];
-            console.log(loadedEntry);
-            return true;
-          }
-        }
         beforeEach(function(done){
           loadFeed(0, function(){
             done();
@@ -134,18 +142,21 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        function getFirstEntry(){
-          var entries = document.getElementsByClassName('entry');
-          console.log(entries[0]);
-          return entries[0];
-        }
-         beforeEach(function(done){
-           loadFeed(1, function(){
-             done();
-           });
-         });
-         it('should change content when new feed is loaded', function(){
-           expect(getFirstEntry()).not.toBe(loadedEntry);
-         });
+        var secondLoad;
+        var firstLoad;
+        beforeEach(function(done){
+          loadFeed(0, function(){
+            firstLoad = getEntry(function(){
+              loadFeed(1, function(){
+                secondLoad = getEntry(done);
+                console.log(firstLoad + ' ' + secondLoad);
+              });
+          });
+          });
+        });
+
+        it('should change content when new feed is loaded', function(){
+          expect(firstLoad).not.toBe(secondLoad);
+        });
     });
 }());
