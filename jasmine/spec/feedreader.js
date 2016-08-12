@@ -124,17 +124,7 @@ $(function() {
     });
 
 
-    /* This test suite is named "New Feed Selection" */
-    function getEntry(callBack){
-      var entries = document.getElementsByClassName('entry');
-      if(entries.length > 0){
-        callBack();
-        console.log(entries[0]);
-        return entries[0];
-      }
-      callBack();
-      return undefined;
-    }
+
     describe("New Feed Selection", function(){
         /* This test ensures when a new feed is loaded
          * by the loadFeed function, the content actually changes.
@@ -143,13 +133,13 @@ $(function() {
         var firstLoad;
         beforeEach(function(done){
           loadFeed(0, function(){
-            firstLoad = getEntry(function(){
-              loadFeed(1, function(){
-                secondLoad = getEntry(done);
-                console.log(firstLoad + ' ' + secondLoad);
-              });
+            firstLoad = $('.entry').html();
           });
+          loadFeed(1, function(){
+            secondLoad =  $('.entry').html();
+            done();
           });
+
         });
 
         it('should change content when new feed is loaded', function(){
