@@ -87,15 +87,21 @@ $(function() {
           * has two expectations: the menu displays when
           * clicked and hides when clicked again.
           */
-          function menuToggleOnClick(){
-            $('a.menu-icon-link').click();
+          function menuToggleOnClick(clicks){
+            //reset body start
+            $('body').addClass('menu-hidden');
+            //click clicks number of times
+            clicks = (clicks >= 1)?clicks:1;
+            for(var i = 0; i<clicks;i++){
+              $('a.menu-icon-link').click();
+            }
             return $('body').hasClass('menu-hidden');
           }
           it('should display when clicked', function(){
             expect(menuToggleOnClick()).toBe(false);
           });
           it('should be hidden when clicked again', function(){
-            expect(menuToggleOnClick()).toBe(true);
+            expect(menuToggleOnClick(2)).toBe(true);
           });
 
     });
