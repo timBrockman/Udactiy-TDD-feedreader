@@ -8,7 +8,7 @@ Otherwise, you can clone the repo, host it locally, and direct your browser to t
 
 # Project Overview
 
-The project objectives was to write a series of tests for a pre-existing project using Jasmine.
+The project objectives were to write a series of tests for a pre-existing project using Jasmine.
 In order to have experience writing tests, this exercise introduces us to writing tests based on a spec that the starter code would have met.
 
 ## This project tests the following things:
