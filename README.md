@@ -28,4 +28,5 @@ In order to have experience writing tests, this exercise introduces us to writin
   - New Feed Selection
     - should change content when different feeds are loaded
 
-For this project I did my best to keep the helper functions for the tests simple and DRY.
+## Personal notes
+For this project, I did my best to keep the helper functions for the tests simple and DRY. In the past I had written tests using mocha and expect.js with superagent to test an express.js restful api. I've read several articles about TDD and BDD but, it was great to have some formal exercises focused on test writting.
