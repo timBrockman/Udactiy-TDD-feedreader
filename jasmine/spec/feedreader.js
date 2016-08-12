@@ -134,12 +134,11 @@ $(function() {
         beforeEach(function(done){
           loadFeed(0, function(){
             firstLoad = $('.entry').html();
+            loadFeed(1, function(){
+              secondLoad =  $('.entry').html();
+              done();
+            });
           });
-          loadFeed(1, function(){
-            secondLoad =  $('.entry').html();
-            done();
-          });
-
         });
 
         it('should change content when new feed is loaded', function(){
